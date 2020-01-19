@@ -42,10 +42,14 @@ class Gates:
         else:
             return False
 
-class Latches(object):
-    def __init__(self, s, r):
-        print("SR flipflop created")
-        uppernor = Gates.NOR(r, False)
-        bottomnor = Gates.NOR(s, uppernor)
-        self.state = Gates.NOR(r, bottomnor) 
-       
+class NANDFF(object):
+    def __init__(self, action):
+        #these are default values
+        self.q = False
+        self.nq = True
+        if action == "set":
+            self.q = Gates.NOR(Gates.NOR(True, self.q), False)
+            self.nq = Gates.NOR(True, self.q)
+        if action == "reset":
+            self.q = Gates.NOR(True, Gates.NOR(False, self.q))
+            self.nq = Gates.NOR(False, self.q)
