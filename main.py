@@ -1,10 +1,12 @@
 import gates
+import memory
 
-gate = gates.gates
+memory = memory.Memory
+gate = gates.Gates
 
-a = True
-b = False
 
-c = gate.XOR(gate.OR(a,b),gate.NAND(a,b))
+s = True
+reset = False 
 
-print(c)
+memory.mem_bus[0] = gates.Latches(s, reset).state
+print(memory.mem_bus[0])
